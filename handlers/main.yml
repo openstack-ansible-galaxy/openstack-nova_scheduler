@@ -1,0 +1,4 @@
+---
+
+- name: Restart nova scheduler
+  service: name=nova-scheduler state=restarted
