@@ -37,7 +37,7 @@ Example Playbook
 
     - hosts: scheduler001
       roles:
-        - role: nova_scheduler
+        - role: openstack-nova_scheduler
           rabbit_username: "openstack-nova"
           rabbit_pass: "{{ RABBIT_NOVA_PASS }}"
 
