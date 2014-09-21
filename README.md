@@ -8,24 +8,25 @@ _Tested on Ubuntu Precise (12.04) and Trusty (14.04)_
 Requirements
 ------------
 
-A RabbitMQ server. See `rabbit_hostname`, `rabbit_username` and
-`rabbit_pass` below.
+A RabbitMQ server. See below.
 
 Role Variables
 --------------
+### Nova scheduler (set by this role)
 
-# Other systems/serivces
-* `rabbit_hostname`:  hostname/IP address where the RabbitMQ service runs.
-                      Defaults to "localhost".
-* `rabbit_username`:  RabbitMQ username for nova conductor.
-                      It must already exist.
-                      Defaults to "rabbit\_username\_default".
-* `rabbit_pass`:      RabbitMQ password for nova conductor.
-                      Defaults to "rabbit\_pass\_default".
+| Name | Default value | Description | Note |
+|---  |---  |---  |--- |
+| `my_ip` | `{{ ansible_eth0.ipv4.address }}` | Management IP for nova-scheduler |
 
-# Role specific
 
-...
+### RabbitMQ (must exist)
+
+| Name | Default value | Description | Note |
+|---  |---  |---  |--- |
+| `rabbit_hostname` | `localhost` | Hostname/IP address where the RabbitMQ service runs ||
+| `rabbit_username` | `rabbit_username_default` | RabbitMQ username for glance ||
+| `rabbit_pass` | `rabbit_pass_default` | RabbitMQ password for glance. ||
+
 
 Dependencies
 ------------
