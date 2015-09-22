@@ -3,11 +3,9 @@
 - hosts: localhost
   remote_user: root
   roles:
-
     - role: openstack-nova_scheduler
-      keystone_hostname: "127.0.0.1"
-      rabbit_hostname: "127.0.0.1"
-      rabbit_username: "guest"
-      rabbit_pass: "guest"
+      nova_scheduler_rabbit_host: "127.0.0.1"
+      nova_scheduler_rabbit_userid: "guest"
+      nova_scheduler_rabbit_password: "guest"
       tags:
         - nova-scheduler
