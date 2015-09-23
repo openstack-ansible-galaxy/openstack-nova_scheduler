@@ -25,7 +25,7 @@
   with_items:
     - section:  DEFAULT
       option:   my_ip
-      value:    "{{ my_ip }}"
+      value:    "{{ nova_scheduler_my_ip }}"
     # RabbitMQ
     - section:  DEFAULT
       option:   rpc_backend

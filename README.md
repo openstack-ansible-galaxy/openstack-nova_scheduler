@@ -18,7 +18,7 @@ Role Variables
 
 | Name | Default value | Description | Note |
 |---  |---  |---  |--- |
-| `my_ip` | `{{ ansible_eth0.ipv4.address }}` | Management IP for nova-scheduler |
+| `nova_scheduler_my_ip` | `{{ ansible_eth0.ipv4.address }}` | Management IP for nova-scheduler |
 
 ### RabbitMQ (must exist)
 
