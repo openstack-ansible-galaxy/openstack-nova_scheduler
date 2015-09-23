@@ -18,6 +18,7 @@ Role Variables
 
 | Name | Default value | Description | Note |
 |---  |---  |---  |--- |
+| `nova_scheduler_database_url` | `sqlite:////var/lib/nova/nova.sqlite` | Database URI ||
 | `nova_scheduler_my_ip` | `{{ ansible_eth0.ipv4.address }}` | Management IP for nova-scheduler |
 
 ### RabbitMQ (must exist)
