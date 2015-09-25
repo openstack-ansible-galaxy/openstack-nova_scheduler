@@ -25,7 +25,7 @@
   with_items:
     - section:  DEFAULT
       option:   my_ip
-      value:    "{{ my_ip }}"
+      value:    "{{ nova_scheduler_my_ip }}"
     # RabbitMQ
     - section:  DEFAULT
       option:   rpc_backend
@@ -54,5 +54,18 @@
     - section:  DEFAULT
       option:   rabbit_ha_queues
       value:    "{{ nova_scheduler_rabbit_ha_queues }}"
+  notify:
+    - Restart nova scheduler
+
+- name: Configure nova scheduler database
+  ini_file: >
+    dest=/etc/nova/nova.conf
+    section="{{ item.section }}"
+    option="{{ item.option }}"
+    value="{{ item.value }}"
+  with_items:
+    - section: database
+      option: connection
+      value: "{{ nova_scheduler_database_url }}"
   notify:
     - Restart nova scheduler

@@ -20,6 +20,9 @@
 # Common
 nova_scheduler_my_ip: "{{ ansible_eth0.ipv4.address }}"
 
+# Database
+nova_scheduler_database_url: sqlite:////var/lib/nova/nova.sqlite
+
 # RabbitMQ
 nova_scheduler_rabbit_userid: rabbit_pass_default
 nova_scheduler_rabbit_password: rabbit_username_default
