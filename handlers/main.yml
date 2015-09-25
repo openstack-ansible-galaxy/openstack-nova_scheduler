@@ -18,4 +18,4 @@
 #
 
 - name: Restart nova scheduler
-  service: name={{ nova_scheduler_service }} state=restarted
+  service: name={{ nova_scheduler_service }} state=restarted enabled=yes
