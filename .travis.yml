@@ -1,46 +1,23 @@
----
 language: python
-python: "2.7"
-
+python: '2.7'
 services:
-  - rabbitmq
-
-
+- rabbitmq
 before_install:
-  # Make sure everything's up to date.
-  - sudo apt-get install python-software-properties
-  - sudo add-apt-repository -y cloud-archive:icehouse
-  - sudo apt-get update -qq
-
-
+- sudo apt-get install python-software-properties
+- sudo add-apt-repository -y cloud-archive:icehouse
+- sudo apt-get update -qq
 install:
-  # Install Ansible.
-  - sudo pip install ansible
-
-  # Add ansible.cfg to pick up roles path.
-  - "{ echo '[defaults]'; echo 'roles_path = ../'; } >> ansible.cfg"
-
-
+- sudo pip install ansible
+- '{ echo ''[defaults]''; echo ''roles_path = ../''; } >> ansible.cfg'
 script:
-  # Check the role/playbook's syntax.
-  - ansible-playbook -i tests/inventory tests/test.yml --syntax-check
-
-  # Run the role/playbook with ansible-playbook.
-  - >
-    ansible-playbook -i tests/inventory tests/test.yml --connection=local
-    --sudo
-
-  # Test role idempotency
-  - >
-    ansible-playbook -vvv -i tests/inventory tests/test.yml -t nova-scheduler
-    --connection=local --sudo
-
-  - >
-    ansible-playbook -i tests/inventory tests/test.yml -t nova-scheduler
-    --connection=local --sudo | grep -q 'changed=0.*failed=0'
-    && (echo 'Idempotence test: pass' && exit 0)
-    || (echo 'Idempotence test: fail' && exit 1)
-
-  # Test nova-scheduler
-  - service nova-scheduler status
-
+- ansible-playbook -i tests/inventory tests/test.yml --syntax-check
+- |
+  ansible-playbook -i tests/inventory tests/test.yml --connection=local --sudo
+- |
+  ansible-playbook -vvv -i tests/inventory tests/test.yml -t nova-scheduler --connection=local --sudo
+- |
+  ansible-playbook -i tests/inventory tests/test.yml -t nova-scheduler --connection=local --sudo | grep -q 'changed=0.*failed=0' && (echo 'Idempotence test: pass' && exit 0) || (echo 'Idempotence test: fail' && exit 1)
+- service nova-scheduler status
+notifications:
+  slack:
+    secure: JTbW/gp2F+NWbzYNZVNM/z8pCnO8aIoCmvRtBudUPx94CaudLViqP39w/KDEhbRUsZsRn7XGMVkYmbHGeEbHP+5Mk+p8wUxiTxUij2QHZhsyUCqT4jRgDFMPaSyq1hCbsUEMTQoJy90/Ta/LW7oPYYJVVRoAJqUC88ATx+iDYiYxn7f9dyEECrI7CiBN+DAk7abZcwwp2Kj3OorP47lmUci1cjUOAfwAygOx5sA3gLwNcU12q9Q21ri6PBwveFyHUsYLZaAJdKk6HgP8yo+Cf2yX0nH+C5GxKIL6xZvIB3Lnfg2t3+xsDuVmd10+8zMJ19b9pgrDJxxCl4V8VkhANbOkkgwSvA3cv1EkQyoFDXeKodXuGLu0aiOmFIWc2za7kWaqn9qRTa/HpH/5mjXmiNByYF+8Pd8mSMNvDflo3SuxUJTlSElPzkanaUO/yy1rcWX5hd9SAJDGJxkuRvAumyyyOrW7kX3f6GeUnA51M2MU3TRGGEoovPFJkwI3cTax6Vz0bskH3AEmWyl0I1sshUh/9uvjeDYX63cw2NZPycj7e/u+xMtmg7LnGB/tOPqih+LzDD+uTUjiphoZ+QkflQo+FEPLQa2kuHM5FUJPtmv5XKJUHPZblxCCtWGFOlDN6zUcctejOo71y2K5V5ByB3HNpym9peqeTbMuzg8rLCo=
